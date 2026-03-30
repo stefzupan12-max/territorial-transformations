@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Territorial Transformations — Stefan Zhupan</title>
+  <style>
+    :root {
+      --line: #000;
+      --bg: #fff;
+      --text: #000;
+      --muted: #6b6b6b;
+      --pad: 24px;
+      --pad-lg: 40px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: auto; }
+
+    .site { min-height: 100vh; }
+    .border-b { border-bottom: 1px solid var(--line); }
+    .border-r { border-right: 1px solid var(--line); }
+    .muted { color: var(--muted); }
+    .smallcaps {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+    }
+
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .hero-title {
+      margin: 28px 0 0;
+      max-width: 1100px;
+      font-size: clamp(42px, 8vw, 110px);
+      line-height: 0.94;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .section-title {
+      margin: 22px 0 0;
+      font-size: clamp(32px, 4.2vw, 70px);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .lead, .body-text {
+      max-width: 860px;
+      font-size: 18px;
+      line-height: 1.85;
+    }
+
+    .body-text { font-size: 16px; }
+
+    .cell { padding: var(--pad); }
+    .cell-lg { padding: var(--pad-lg); }
+
+    .button-row {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+
+    .button-row a {
+      padding: 14px 18px;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .button-row a + a { border-left: 1px solid var(--line); }
+    .button-row a:hover,
+    .nav-link:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .nav-link {
+      padding: 16px;
+      font-size: 14px;
+      border-right: 1px solid var(--line);
+      transition: 0.2s ease;
+    }
+
+    .nav-link:last-child { border-right: 0; }
+
+    .col-12 { grid-column: span 12; }
+    .col-10 { grid-column: span 10; }
+    .col-8 { grid-column: span 8; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .col-2 { grid-column: span 2; }
+
+    .info-block p { margin: 0; }
+    .info-block .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+    .info-block .value {
+      margin-top: 10px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .list-grid,
+    .site-grid,
+    .theme-grid,
+    .deliverables-grid {
+      display: grid;
+    }
+
+    .list-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .site-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .deliverables-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card, .deliverable {
+      padding: var(--pad-lg);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .card:last-child,
+    .site-card:last-child,
+    .deliverable:last-child { border-right: 0; }
+
+    .card h3,
+    .site-card h3 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+
+    .card p,
+    .site-card p,
+    .theme-item,
+    .deliverable {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .site-card {
+      padding: var(--pad-lg);
+      border-right: 1px solid var(--line);
+    }
+
+    .site-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .theme-item {
+      padding: 24px 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quote {
+      max-width: 1200px;
+      font-size: clamp(28px, 3.4vw, 56px);
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    .deliverable h4 {
+      margin: 0 0 18px;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .deliverable ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .deliverable li { margin-bottom: 10px; }
+
+    .footer-title {
+      margin: 10px 0 0;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+
+    @media (max-width: 1100px) {
+      .list-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .site-grid,
+      .deliverables-grid,
+      .theme-grid { grid-template-columns: 1fr; }
+      .card,
+      .site-card,
+      .theme-item,
+      .deliverable { border-right: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .grid-12 { grid-template-columns: 1fr; }
+      .nav-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .border-r { border-right: 0 !important; }
+      .col-2, .col-4, .col-6, .col-8, .col-10, .col-12 { grid-column: 1 / -1; }
+      .cell, .cell-lg { padding: 22px; }
+      .nav-link:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .lead, .body-text { font-size: 16px; line-height: 1.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header class="border-b">
+      <nav class="grid-12 border-b">
+        <div class="col-4 cell border-r border-b">
+          <p class="smallcaps">Master Thesis</p>
+          <p style="margin:10px 0 0; font-size:14px;">Strategic Design & Entrepreneurship</p>
+        </div>
+        <div class="col-8">
+          <div class="nav-grid">
+            <a class="nav-link" href="#context">Context</a>
+            <a class="nav-link" href="#challenge">Challenge</a>
+            <a class="nav-link" href="#proposal">Proposal</a>
+            <a class="nav-link" href="#site">Site</a>
+            <a class="nav-link" href="#framework">Framework</a>
+            <a class="nav-link" href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="grid-12">
+        <div class="col-8 cell-lg border-r border-b">
+          <p class="smallcaps">Ohrid–Prespa Region · Spring 2026</p>
+          <h1 class="hero-title">Territorial Transformations</h1>
+          <p class="lead">
+            From extractive expansion to sensitive transformation in a water-based heritage landscape: the Ohrid–Prespa region as a case study.
+          </p>
+          <div class="button-row">
+            <a href="#proposal">View proposal</a>
+            <a href="#context">Read thesis frame</a>
+          </div>
+        </div>
+
+        <div class="col-4 border-b">
+          <div class="info-block border-b cell-lg">
+            <p class="label">Author</p>
+            <p class="value">Stefan Zhupan</p>
+          </div>
+          <div class="info-block border-b cell-lg">
+            <p class="label">Institute</p>
+            <p class="value">Visual Design and Interaction</p>
+          </div>
+          <div class="info-block border-b cell-lg">
+            <p class="label">Supervisor</p>
+            <p class="value">Ellen Højgaard Jensen</p>
+          </div>
+          <div class="info-block border-b cell-lg">
+            <p class="label">Head of Programme</p>
+            <p class="value">Cammila Hedegaard Møller</p>
+          </div>
+          <div class="info-block cell-lg">
+            <p class="label">Institution</p>
+            <p class="value">Royal Danish Academy</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="context" class="grid-12 border-b">
+        <div class="col-4 cell-lg border-r border-b">
+          <p class="smallcaps">Context</p>
+          <h2 class="section-title">Water, heritage, and transformation</h2>
+        </div>
+        <div class="col-8 cell-lg">
+          <p class="lead">
+            This thesis asks how water-integrated architecture and territorial strategies can transform and renew heritage-sensitive landscapes. In many water-based territories, planning frameworks treat water primarily as technical infrastructure or environmental constraint, while development pressures promote replacement rather than transformation of existing buildings.
+          </p>
+          <p class="body-text">
+            Using the Ohrid–Prespa region as a case study, the project repositions both water and existing building stock as active spatial resources. The region is framed as a mixed natural and cultural UNESCO landscape, shaped by biodiversity, long settlement continuity, tourism pressure, and overlapping governance structures.
+          </p>
+        </div>
+      </section>
+
+      <section id="challenge" class="grid-12 border-b">
+        <div class="col-6 cell-lg border-r border-b">
+          <p class="smallcaps">Challenge</p>
+          <p class="quote">
+            Can reuse replace expansion as the driver of growth in a water-heritage landscape?
+          </p>
+        </div>
+        <div class="col-6 cell-lg">
+          <p class="body-text">
+            The thesis challenges growth-dependent urbanisation, generic new-build infrastructure, and the demolition of existing building stock. It asks how adaptive reuse can transform vernacular and underused buildings into spatial and economic resources without degrading the environmental and cultural values that attract tourism in the first place.
+          </p>
+        </div>
+      </section>
+
+      <section id="proposal" class="border-b">
+        <div class="grid-12 border-b">
+          <div class="col-4 cell-lg border-r border-b">
+            <p class="smallcaps">Proposal</p>
+            <h2 class="section-title">From expansion to sensitive transformation</h2>
+          </div>
+          <div class="col-8 cell-lg">
+            <p class="lead">
+              The project operates across two interconnected scales: a strategic territorial prototype and an architectural prototype. Rather than introducing new development, it focuses on the reuse, transformation, and reactivation of existing, underused building stock, especially in areas peripheral to saturated tourist sites.
+            </p>
+          </div>
+        </div>
+
+        <div class="list-grid">
+          <div class="card">
+            <h3>Strategic scale</h3>
+            <p>
+              A water-integrated strategic plan addressing long-term territorial challenges related to tourism, heritage protection, and environmental resilience.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Architectural scale</h3>
+            <p>
+              A case study translating regional insights into a concrete architectural and urban proposal based on reprogramming, adaptation, and reconnection rather than replacement.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Comparative lens</h3>
+            <p>
+              A small comparative analysis of similar interventions across Europe to position the project within a wider spatial and architectural discourse.
+            </p>
+          </div>
+          <div class="card" style="border-right:0;">
+            <h3>SDG alignment</h3>
+            <p>
+              The work aligns with UN Sustainable Development Goals 9, 11, and 17.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="site" class="border-b">
+        <div class="grid-12 border-b">
+          <div class="col-4 cell-lg border-r border-b">
+            <p class="smallcaps">Site</p>
+            <h2 class="section-title">A layered water-based territory</h2>
+          </div>
+          <div class="col-8 cell-lg">
+            <p class="lead">
+              The thesis focuses on the Ohrid region within the wider Ohrid–Prespa transboundary landscape shared by North Macedonia, Albania, and Greece. The region is understood through geological formation, hydrological systems, civilisational layers, and current development pressures.
+            </p>
+          </div>
+        </div>
+
+        <div class="site-grid">
+          <div class="site-card">
+            <div class="site-head">
+              <h3>Trpejca</h3>
+              <span class="tag">North Macedonia</span>
+            </div>
+            <p>
+              A tourism-dependent rural settlement on the shoreline, relevant for testing pressure, seasonality, and water proximity.
+            </p>
+          </div>
+          <div class="site-card">
+            <div class="site-head">
+              <h3>Lin</h3>
+              <span class="tag">Albania</span>
+            </div>
+            <p>
+              A settlement with a more diversified economy, strong lakeside identity, and long archaeological continuity.
+            </p>
+          </div>
+          <div class="site-card" style="border-right:0;">
+            <div class="site-head">
+              <h3>Shipokno</h3>
+              <span class="tag">Galicica area</span>
+            </div>
+            <p>
+              An abandoned village condition used to explore the reuse potential of underused rural stock in relation to the broader region.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="framework" class="grid-12 border-b">
+        <div class="col-4 cell-lg border-r border-b">
+          <p class="smallcaps">Framework</p>
+          <h2 class="section-title">Theoretical and methodological grounding</h2>
+          <p class="body-text">
+            The project moves between territoriality, actor-networks, post-growth, doughnut urbanism, qualitative interviews, fieldwork, mapping, and architectural testing.
+          </p>
+        </div>
+        <div class="col-8">
+          <div class="theme-grid">
+            <div class="theme-item">Materiality of territorial production · Mattias Kärrholm</div>
+            <div class="theme-item">Down to Earth · Bruno Latour</div>
+            <div class="theme-item">Seven planetary design · Bruno Latour</div>
+            <div class="theme-item">Post-growth planning and doughnut urban development</div>
+            <div class="theme-item">Epistemic tools: hand drawing, cartography, archives, interviews, cataloguing</div>
+            <div class="theme-item">Operative tools: GIS, parametric modelling, visualisation, CNC and 3D-printed models</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-b">
+        <div class="grid-12 border-b">
+          <div class="col-2 cell-lg border-r border-b">
+            <p class="smallcaps">Statement</p>
+          </div>
+          <div class="col-10 cell-lg">
+            <p class="quote">
+              Territorial transformations shift the focus from extractive expansion toward sensitive transformation, using water, heritage, and existing building stock as the basis for renewal in the Ohrid–Prespa landscape.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-12">
+          <div class="col-4 cell-lg border-r border-b">
+            <p class="smallcaps">Deliverables</p>
+            <h2 class="section-title">What the thesis produces</h2>
+          </div>
+          <div class="col-8">
+            <div class="deliverables-grid">
+              <div class="deliverable">
+                <h4>Atlas + research</h4>
+                <ul>
+                  <li>Anthological timeline</li>
+                  <li>Historical and cadastral maps</li>
+                  <li>Shoreline and photo catalogues</li>
+                  <li>Current overview and future simulation</li>
+                </ul>
+              </div>
+              <div class="deliverable">
+                <h4>Strategic plan</h4>
+                <ul>
+                  <li>Regional and shoreline plans</li>
+                  <li>Simulation model</li>
+                  <li>Regional model</li>
+                  <li>Territorial visualisations</li>
+                </ul>
+              </div>
+              <div class="deliverable" style="border-right:0;">
+                <h4>Architecture</h4>
+                <ul>
+                  <li>Site model 1:1000</li>
+                  <li>Plan and section 1:100</li>
+                  <li>Detail 1:5</li>
+                  <li>Render, 3D model, and presentation packaging</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="grid-12">
+      <div class="col-8 cell-lg border-r border-b">
+        <p class="smallcaps">Contact</p>
+        <p class="footer-title">Stefan Zhupan</p>
+        <p class="body-text" style="max-width:700px; margin-top:18px;">
+          Thesis website draft for presenting Territorial Transformations, its regional framework, methodology, and architectural direction.
+        </p>
+      </div>
+      <div class="col-4 cell-lg">
+        <p style="margin:0; font-size:14px;">Royal Danish Academy</p>
+        <p style="margin:10px 0 0; font-size:14px;" class="muted">Strategic Design & Entrepreneurship</p>
+        <p style="margin:10px 0 0; font-size:14px;" class="muted">Visual Design and Interaction</p>
+        <p style="margin:10px 0 0; font-size:14px;" class="muted">Spring 2026</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
