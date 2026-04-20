@@ -30,6 +30,7 @@
     .border-b { border-bottom: 1px solid var(--line); }
     .border-r { border-right: 1px solid var(--line); }
     .muted { color: var(--muted); }
+
     .smallcaps {
       font-size: 11px;
       text-transform: uppercase;
@@ -47,8 +48,8 @@
     }
 
     .hero-title {
-      margin: 28px 0 0;
-      max-width: 1100px;
+      margin: 14px 0 0;
+      max-width: 900px;
       font-size: clamp(42px, 8vw, 110px);
       line-height: 0.94;
       font-weight: 400;
@@ -88,6 +89,7 @@
     }
 
     .button-row a + a { border-left: 1px solid var(--line); }
+
     .button-row a:hover,
     .nav-link:hover {
       background: #000;
@@ -121,6 +123,41 @@
       margin-top: 10px;
       font-size: 22px;
       line-height: 1.3;
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 760px;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .hero-image,
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-image img {
+      object-fit: cover;
+      filter: grayscale(100%) contrast(108%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      left: 40px;
+      bottom: 40px;
+      max-width: 780px;
+      background: rgba(255,255,255,0.88);
+      padding: 22px 24px 20px;
+      border: 1px solid var(--line);
+    }
+
+    .hero-subtext {
+      margin: 18px 0 0;
+      max-width: 650px;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     .list-grid,
@@ -237,6 +274,22 @@
       .cell, .cell-lg { padding: 22px; }
       .nav-link:nth-child(n+3) { border-top: 1px solid var(--line); }
       .lead, .body-text { font-size: 16px; line-height: 1.8; }
+
+      .hero-panel {
+        min-height: 540px;
+      }
+
+      .hero-overlay {
+        left: 22px;
+        right: 22px;
+        bottom: 22px;
+        max-width: none;
+        padding: 18px;
+      }
+
+      .hero-subtext {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -261,15 +314,23 @@
       </nav>
 
       <div class="grid-12">
-        <div class="col-8 cell-lg border-r border-b">
-          <p class="smallcaps">Ohrid–Prespa Region · Spring 2026</p>
-          <h1 class="hero-title">Territorial Transformations</h1>
-          <p class="lead">
-            From extractive expansion to sensitive transformation in a water-based heritage landscape: the Ohrid–Prespa region as a case study.
-          </p>
-          <div class="button-row">
-            <a href="#proposal">View proposal</a>
-            <a href="#context">Read thesis frame</a>
+        <div class="col-8 border-r border-b">
+          <div class="hero-panel">
+            <div class="hero-image">
+              <img src="images/terrain-ohrid.jpg" alt="Terrain model of the Ohrid–Prespa region">
+            </div>
+
+            <div class="hero-overlay">
+              <p class="smallcaps">Ohrid–Prespa Region · Spring 2026</p>
+              <h1 class="hero-title">Territorial Transformations</h1>
+              <p class="hero-subtext">
+                From extractive expansion to sensitive transformation in a water-based heritage landscape: the Ohrid–Prespa region as a case study.
+              </p>
+              <div class="button-row">
+                <a href="#proposal">View proposal</a>
+                <a href="#context">Read thesis frame</a>
+              </div>
+            </div>
           </div>
         </div>
 
