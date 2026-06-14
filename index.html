@@ -1,4 +1,89 @@
- grid-template-columns: 1.2fr 0.8fr;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Territorial Transformations — Stefan Zhupan</title>
+
+  <style>
+    :root {
+      --bg: #f4f2ed;
+      --text: #111;
+      --muted: #666;
+      --line: #111;
+      --soft: #dedbd2;
+      --dark: #050505;
+      --white: #fff;
+      --accent: #7b8f7a;
+      --pad: clamp(20px, 4vw, 64px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px var(--pad);
+      border-bottom: 1px solid var(--line);
+      background: rgba(244, 242, 237, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      border-bottom: 1px solid transparent;
+    }
+
+    nav a:hover {
+      border-bottom: 1px solid var(--text);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
       border-bottom: 1px solid var(--line);
       padding-top: 58px;
     }
